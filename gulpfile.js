@@ -8,6 +8,15 @@ var sequence = require('run-sequence');
 var babel = require('gulp-babel');
 
 
+// make a task that prepares the pure stappo object to be exported in different manners
+// 1. Separate the pure class in a single file without any specific export
+// 2. Mount different export scenarios, and append pure class file content (use https://www.npmjs.com/package/gulp-replace)
+// 3. Adjust the build targets
+
+// --- that way, we provide a generic AMD/UMD/CommonJS/ES6 modularization stuff via browserify
+// --- A server side thing, for node
+// --- Classical pure client side lib to be loaded inserted via HTML
+
 function compileES5() {
 	return gulp.src('src/stappo.js')
 		.pipe(babel({
@@ -16,7 +25,7 @@ function compileES5() {
 }
 
 gulp.task('build:es5', function () {
-	compileES5()
+	return compileES5()
 		.pipe(uglify({
 			output: {
 				ascii_only: true
@@ -29,7 +38,7 @@ gulp.task('build:es5', function () {
 });
 
 gulp.task('build:bundle', function () {
-	compileES5()
+	return compileES5()
 		.pipe(browserify({
 			standalone: "stappo"
 		}))
@@ -46,7 +55,7 @@ gulp.task('build:bundle', function () {
 });
 
 gulp.task('run:test', function () {
-	gulp.src('spec/*-spec.js').pipe(jasmine({verbose: true}));
+	return gulp.src('spec/*-spec.js').pipe(jasmine({verbose: true}));
 });
 
 gulp.task('test', function (cb) {
