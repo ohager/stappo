@@ -1,0 +1,46 @@
+{
+  "name": "stappo",
+  "description": "maybe the smallest application state manager ever",
+  "version": "0.0.1",
+  "author": "Oliver Hager",
+  "email": "oliver@devbutze.com",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ohager/stappo"
+  },
+  "keywords": [
+    "flux",
+    "redux",
+    "react",
+    "riotjs",
+    "angular2",
+    "ng2",
+    "polymer",
+    "webcomponents",
+    "nanoflux"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "async": "^2.0.0-rc.6",
+    "bluebird": "^3.4.1",
+    "browserify": "^11.0.1",
+    "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-jasmine": "^2.0.1",
+    "gulp-preprocess": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.1",
+    "jasmine-core": "^2.3.4",
+    "jasmine-node": "^1.14.5",
+    "object-assign": "^4.0.1",
+    "q": "^1.4.1",
+    "rsvp": "^3.2.1",
+    "run-sequence": "^0.3.2"
+  },
+  "scripts": {
+    "test": "node ./node_modules/jasmine-node/lib/jasmine-node/cli.js ./spec --verbose",
+    "build": "gulp",
+    "release": "npm run build && npm publish"
+  }
+}
