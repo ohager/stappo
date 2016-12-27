@@ -1,4 +1,4 @@
-module.exports = new function() {
+export default new function () {
 
 	var _idCounter = 0
 	var _listeners = []

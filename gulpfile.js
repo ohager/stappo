@@ -8,40 +8,55 @@ var sequence = require('run-sequence');
 var babel = require('gulp-babel');
 
 
-function compile() {
+function compileES5() {
 	return gulp.src('src/stappo.js')
 		.pipe(babel({
 			presets: ['es2015']
 		}))
-/*		.pipe(browserify({
-			standalone: "stappo"
-		}))
-		*/
 }
 
-gulp.task('build', function () {
-	compile().pipe(gulp.dest('./dist'))
+gulp.task('build:es5', function () {
+	compileES5()
+		.pipe(uglify({
+			output: {
+				ascii_only: true
+			}
+		}))
+		.pipe(rename(function (path) {
+			path.basename += ".min";
+		}))
+		.pipe(gulp.dest('./dist'))
 });
 
-gulp.task('build:uglify', function () {
-	compile()
-	.pipe(uglify({
-		output: {
-			ascii_only: true
-		}
-	}))
-	.pipe(rename(function (path) {
-		path.basename += ".min";
-	}))
-	.pipe(gulp.dest('./dist'))
+gulp.task('build:bundle', function () {
+	compileES5()
+		.pipe(browserify({
+			standalone: "stappo"
+		}))
+
+		.pipe(uglify({
+			output: {
+				ascii_only: true
+			}
+		}))
+		.pipe(rename(function (path) {
+			path.basename += ".bundle.min";
+		}))
+		.pipe(gulp.dest('./dist'))
 });
 
-gulp.task('build:test', function () {
-	gulp.src('spec/*-spec.js')
-		.pipe(preprocess({context: {DIST: true}}))
-		.pipe(jasmine({verbose: true}));
+gulp.task('run:test', function () {
+	gulp.src('spec/*-spec.js').pipe(jasmine({verbose: true}));
+});
+
+gulp.task('test', function (cb) {
+	sequence('build:es5', 'run:test', cb);
+});
+
+gulp.task('build', function (cb) {
+	sequence('build:es5','build:bundle', cb);
 });
 
 gulp.task('default', function (cb) {
-	sequence('build', 'build:uglify', 'build:test', cb);
+	sequence(['build'], 'run:test', cb);
 });

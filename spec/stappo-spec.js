@@ -1,14 +1,4 @@
-var stappoDir;
-
-// @ifdef DIST
-stappoDir = "../dist/stappo";
-// @endif
-
-// @ifndef DIST
-stappoDir = "../src/stappo";
-// @endif
-
-var stappo = require(stappoDir);
+var stappo = require("../dist/stappo.min").default;
 
 describe("Stappo", function () {
 

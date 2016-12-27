@@ -1,32 +1,23 @@
-[![Build Status](https://travis-ci.org/ohager/nanoflux-fusion.svg?branch=master)](https://travis-ci.org/ohager/nanoflux-fusion)
-[![npm version](https://img.shields.io/npm/v/nanoflux-fusion.svg?style=flat-square)](https://www.npmjs.com/package/nanoflux-fusion)
-[![GetBadges Game](http://ohager-nanoflux-fusion.getbadges.io/shield/company/ohager-nanoflux-fusion/user/8773)](https://ohager-nanoflux-fusion.getbadges.io/?ref=shield-player)
+# stappo
 
-# nanoflux-fusion
+Maybe the smallest Application State Manager ever.
 
-[__PROJECT SITE__](http://ohager.github.io/nanoflux/)
+This project is just to checkout the limits on optimization. The aim is to squeeze out the last bytes and create the worlds smallest
+ application state manager written in Javascript.
 
-> Note: Fusion is still in beta, being tested on some real world examples. You may use it already. If you encounter issues feel free to report them! 
+Besides all that fun, it is meant to be fully functional and usable for real-world applications. 
 
-A Redux-like extension for Nanoflux.
+## Usage
 
-*nanoflux-fusion* is built on top of [nanoflux](https://github.com/ohager/nanoflux), a quite efficient Flux implementation,  
-and adopts the concept of reducer functions for application state management, making Flux even more comfortable.
+In the near future a first version for npm will be published.
 
-## Install
-
-Easy peasy lemon squeezy!
-
-```npm install nanoflux-fusion --save```
-
+To use it right now, just pick up the ./dist/stappo.min.js.
+ 
+It 
 
 ## Concept
 
-[Dan Abramov](https://github.com/gaearon) pushed the Flux evolution with [Redux](http://redux.js.org/) and proved that application 
-state management is possible with a very minimalistic approach. The idea of using reducer functions to alter the state
-is very elegant. *nanoflux-fusion* adopts the idea of reducer functions (called *Fusionators*, because naming is fun) to make Flux even more comfortable.
-That way, it's not necessary to define any Store. The user just focus on *how* he wants to alter the state using
-functions the simply return the new state.
+
 
 ### Example
 
