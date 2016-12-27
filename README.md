@@ -65,7 +65,8 @@ Updates the application state, i.e. merges the `jsonObj` into the application st
 
 # Roadmap
 
-- To be even smaller I need to mess around with the module system. 
+- To be even smaller I need to mess around with the module system.
+- Make a online Demo (and a cool site maybe!)
 - I intent to make it available also as a pre-historic standalone lib (for non-2017 individuals - like me). That way it won't have any overhead it all --- keep it fucking simple, dude!
 - Additionally, I want to include Google Closure Compiler to make it even smaller...e.g. like this:
 (402 bytes)
