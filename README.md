@@ -63,3 +63,12 @@ Revokes the subscription established on `stappo.listen`. The `listenerId` is the
 Updates the application state, i.e. merges the `jsonObj` into the application state. On update all listeners are notified.
 
 
+# Roadmap
+
+- To be even smaller I need to mess around with the module system. 
+- I intent to make it available also as a pre-historic standalone lib (for non-2017 individuals - like me). That way it won't have any overhead it all --- keep it fucking simple, dude!
+- Additionally, I want to include Google Closure Compiler to make it even smaller...e.g. like this:
+(402 bytes)
+``` javascript
+window.Stappo=new function(){function e(b){Object.getOwnPropertyNames(b).forEach(function(a){(a=b[a])&&"object"===typeof a&&e(a)});return Object.freeze(b)}var f=0,c=[],d={};this.listen=function(b,a){c.push({id:++f,f:b,c:a});return f};this.unlisten=function(b){c=c.filter(function(a){return a.id!==b})};this.update=function(b){d=e(Object.assign({},d,b));c.forEach(function(a){return a.f.call(a.c,d)})}};
+```
