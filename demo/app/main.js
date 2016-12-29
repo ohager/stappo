@@ -1,3 +1,5 @@
-window.stappo = require('stappo').default;
+var StappoClass = require('stappo')
+window.stappo = new StappoClass()
+window._ = require('lodash')
 require('./demo.tag')
 riot.mount('demo')

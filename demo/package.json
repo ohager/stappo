@@ -27,6 +27,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "stappo": "0.0.1-alpha"
+    "lodash": "^4.17.3",
+    "stappo": "*"
   }
 }
