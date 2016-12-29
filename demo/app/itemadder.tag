@@ -7,9 +7,13 @@
         <button class="c-button c-button--brand" onclick={add}>Add</button>
     </div>
     <script>
+        var deepClone = require('deep-clone')
+
         add(e){
-	        var items = _.cloneDeep(stappo.get().items || []);
+            // need to copy the state, as it is immutable
+	        var items = deepClone(stappo.get().items || []);
 	        items.push({text: this.refs.item.value});
+            // now, just reset the items state!
 	        stappo.update({items: items});
 
 	        this.refs.item.value = "";

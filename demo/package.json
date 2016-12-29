@@ -27,7 +27,9 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "deep-clone": "^3.0.2",
     "lodash": "^4.17.3",
+    "lodash.clonedeep": "^4.5.0",
     "stappo": "*"
   }
 }
