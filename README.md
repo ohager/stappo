@@ -1,5 +1,7 @@
 # stappo
 
+`npm i -S stappo`
+
 Maybe the smallest Application State Manager ever.
 
 This project is just to checkout the limits on optimization. The aim is to squeeze out the last bytes and create the worlds smallest
@@ -7,14 +9,7 @@ This project is just to checkout the limits on optimization. The aim is to squee
 
 Besides all that fun, it is meant to be fully functional and usable for real-world applications. 
 
-## Usage
-
-In the near future a first version for npm will be published.
-
-To use it right now, just pick up the `./dist/stappo.min.js`, or the browserified version `./dist/stappo.bundle.min.js`
-
-In fact, these builds have some overhead, which I want to see ow to get rid of it. 
-
+[ONLINE DEMO](https://rawgit.com/ohager/stappo/master/demo/index.html)
 
 ## Very easy to use
 
@@ -25,19 +20,22 @@ The overall concept is deadly simple. _Stappo_ maintains an Application State, w
 ### Example
 
 ```javascript
-	const stappo = require('stappo');
+	// stappo must be instantiated
+	// this could be useful to manage large states (e.g one instance per domain) 
+	const StappoClass = require('stappo');
+	const stappo = new StappoClass()
 	// 
 	const listener = stappo.listen( state => {
-	    console.log("Updated State", JSON.stringify(state, "  "));
+		console.log("Updated State", JSON.stringify(state, "  "));
 	});
 	 
 	// update the state --- it'll be merged into the application state
 	stappo.update({ 
-	    foo: { 
-	        bar : { 
-	            a: 42, 
-	            b : [0,1,2]
-	        }
+		foo: { 
+			bar : { 
+				a: 42, 
+				b : [0,1,2]
+			}
 	}});
 	// stop listen to state changes
 	stappo.unlisten(listener);
@@ -53,7 +51,6 @@ It is used to give the called functionObj its calling context (where `this` refe
 
 The function returns an id, which can/should be used on `stappo.unlisten`.
 
-
 ### `stappo.unlisten(listenerId)`
  
 Revokes the subscription established on `stappo.listen`. The `listenerId` is the return value from `stappo.listen`.
@@ -62,11 +59,13 @@ Revokes the subscription established on `stappo.listen`. The `listenerId` is the
  
 Updates the application state, i.e. merges the `jsonObj` into the application state. On update all listeners are notified.
 
+### `stappo.get()`
+
+Returns the current state
 
 # Roadmap
 
 - To be even smaller I need to mess around with the module system.
-- Make a online Demo (and a cool site maybe!)
 - I intent to make it available also as a pre-historic standalone lib (for non-2017 individuals - like me). That way it won't have any overhead it all --- keep it fucking simple, dude!
 - Additionally, I want to include Google Closure Compiler to make it even smaller...e.g. like this:
 (402 bytes)
