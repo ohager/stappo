@@ -1,0 +1,32 @@
+{
+  "name": "stappo-demo",
+  "version": "0.0.1",
+  "description": "Simple Stappo Example used with fucking RiotJS",
+  "main": "app/main.js",
+  "author": "Oliver Hager",
+  "license": "MIT",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --progress --colors -d --port 3000"
+  },
+  "keywords": [
+    "stappo",
+    "riot",
+    "webpack"
+  ],
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "riot": "^3.0.1",
+    "riotjs-loader": "^3.0.0",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "stappo": "0.0.1-alpha"
+  }
+}

@@ -1,8 +1,10 @@
-var stappo = require("../dist/stappo.min").default;
+var Stappo = require("../dist/stappo.min").default;
+var stappo;
 
 describe("Stappo", function () {
 
 	beforeEach(function(){
+		stappo = new Stappo();
 	});
 
 	it("should notify only active listeners", function () {
@@ -28,6 +30,12 @@ describe("Stappo", function () {
 
 		stappo.update({a:1});
 		stappo.unlisten(listener);
+	});
+
+	it("should return current state", function () {
+		expect(stappo.get()).toEqual({})
+		stappo.update({a:1})
+		expect(stappo.get().a).toBe(1)
 	});
 
 	it("should have deeply immutable state", function () {

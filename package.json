@@ -1,7 +1,7 @@
 {
   "name": "stappo",
   "description": "maybe the smallest application state manager ever",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha",
   "author": "Oliver Hager",
   "email": "oliver@devbutze.com",
   "private": false,
@@ -37,7 +37,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
-    "test": "gulp build:test && node ./node_modules/jasmine-node/lib/jasmine-node/cli.js ./spec --verbose",
+    "test": "gulp build:es5 && node ./node_modules/jasmine-node/lib/jasmine-node/cli.js ./spec --verbose",
     "build": "gulp",
     "release": "npm run build && npm publish"
   }

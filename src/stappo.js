@@ -1,4 +1,4 @@
-export default new function () {
+export default function () {
 
 	var _idCounter = 0
 	var _listeners = []
@@ -29,6 +29,8 @@ export default new function () {
 		// notify listeneres
 		_listeners.forEach(l => l.f.call(l.c, _state))
 	}
+
+	this.get = () => _state
 }
 
 
