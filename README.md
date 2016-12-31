@@ -33,7 +33,7 @@ Using the Google Closure Compiler Service the web-only version can be compressed
 ```javascript
 function Stappo(a){function d(c){for(var a in c)if(c.hasOwnProperty(a)){var b=c[a];"object"==typeof b&&d(b)}return Object.freeze(c)}a=void 0===a?"stappo":a;var b;this.update=function(c){b=d(Object.assign({},b,c));window.dispatchEvent(new CustomEvent(a,{detail:b}))};this.get=function(){return b}};
 ```
-[Show file]() 
+[Show file](https://raw.githubusercontent.com/ohager/stappo/master/dist/stappo.web.min.js) 
 
 ### Other sizes
 
