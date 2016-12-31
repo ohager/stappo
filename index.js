@@ -1,1 +1,1 @@
-module.exports = require('./dist/stappo.module.bundle');
+module.exports = require('./dist/stappo.bundle');

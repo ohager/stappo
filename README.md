@@ -11,18 +11,37 @@ Besides all that fun, it is meant to be fully functional and usable for real-wor
 
 [ONLINE DEMO](https://rawgit.com/ohager/stappo/master/demo/index.html)
 
+## Versions
+
+1. __Generic Bundle__ `./dist/stappo.bundle.js` - A browserified bundle usable either on client- (Browser) or server-side (NodeJS). The bundles supports AMD/UMD/CommonJS/ES6 module importation.
+2. __Generic__ `.dist/stappo.min.js` - Usable on client or server-side, but without any module support (plain ES5 class)
+3. __Web-Only Bundle__ `./dist/stappo.web.bundle.js` - Only for browsers, supports AMD/UMD/CommonJS/ES6 module  
+4. __Web-Only__ `./dist/stappo.web.min.js` - Plain class, for browsers only...no overhead at all!    
+
+### Generic vs Web-Only
+
+The generic version implements its own observer (aka pub/sub) pattern, and therefore doesn't rely on specific platform.
+The web-only version uses custom events of the browsers event system (addEventListener). The web-only version is smaller than the generic version.
+
+
 ## Optimization Status
 
-### 297 Bytes (web-only)
+### 298 Bytes (web-only)
 
-
-Using the Google Closure Compiler Service the web-only version can be compressed to 297 bytes
+Using the Google Closure Compiler Service the web-only version can be compressed to 298 bytes
 
 ```javascript
 function Stappo(a){function d(c){for(var a in c)if(c.hasOwnProperty(a)){var b=c[a];"object"==typeof b&&d(b)}return Object.freeze(c)}a=void 0===a?"stappo":a;var b;this.update=function(c){b=d(Object.assign({},b,c));window.dispatchEvent(new CustomEvent(a,{detail:b}))};this.get=function(){return b}};
 ```
+[Show file]() 
 
-> Note: The Closure Compiler is not part of build chain yet, so the current dist versions aren't that small! 
+### Other sizes
+
+1. __Generic Bundle__ `./dist/stappo.bundle.js` - 1.330 bytes
+2. __Generic__ `.dist/stappo.min.js` - 360 bytes
+3. __Web-Only Bundle__ `./dist/stappo.web.bundle.js` - 1.303 bytes  
+4. __Web-Only__ `./dist/stappo.web.min.js` - 298 bytes    
+
 
 ## Very easy to use
 
@@ -30,7 +49,7 @@ The overall concept is deadly simple. _Stappo_ maintains an Application State, w
  can listen to, while others may update the state. 
  On state updates the subscribed listeners are called, receiving the new state. The state is __immutable__.
  
-### Example
+### Example Generic Bundle
 
 ```javascript
 	// stappo must be instantiated

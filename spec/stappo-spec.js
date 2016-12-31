@@ -1,7 +1,7 @@
-var Stappo = require("../dist/stappo.module");
+var Stappo = require("../dist/stappo.bundle");
 var stappo;
 
-describe("Stappo", function () {
+describe("Stappo Generic (Bundle)", function () {
 
 	beforeEach(function(){
 		stappo = new Stappo();
