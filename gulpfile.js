@@ -1,3 +1,5 @@
+var path = require('path');
+var fs = require('fs');
 var gulp = require('gulp');
 var rename = require('gulp-rename');
 var browserify = require('gulp-browserify');
@@ -6,50 +8,80 @@ var preprocess = require('gulp-preprocess');
 var jasmine = require('gulp-jasmine');
 var sequence = require('run-sequence');
 var babel = require('gulp-babel');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
+var replace = require('gulp-replace');
+const compiler = require('google-closure-compiler-js').gulp();
 
+var StappoImpl = "./src/stappo.impl.js"; // generic (server/web) implementation
+var StappoWebImpl = "./src/stappo.web.impl.js"; // web-only implementation
 
-// make a task that prepares the pure stappo object to be exported in different manners
-// 1. Separate the pure class in a single file without any specific export
-// 2. Mount different export scenarios, and append pure class file content (use https://www.npmjs.com/package/gulp-replace)
-// 3. Adjust the build targets
+function renderTemplate(targetFile){
+	var stappoImpl = fs.readFileSync(StappoImpl, "utf8");
+	var outFile = path.basename(targetFile).replace('.temp','');
+	return gulp.src([targetFile])
+		.pipe(replace('/*__stappo_impl__*/', stappoImpl));
+}
 
-// --- that way, we provide a generic AMD/UMD/CommonJS/ES6 modularization stuff via browserify
-// --- A server side thing, for node
-// --- Classical pure client side lib to be loaded inserted via HTML
+gulp.task('compile', function() {
+	return gulp.src(StappoWebImpl, {base: './'})
+	// your other steps here
+		.pipe(compiler({
+			compilationLevel: 'SIMPLE',
+			warningLevel: 'VERBOSE',
+			outputWrapper: '(function(){\n%output%\n}).call(this)',
+			jsOutputFile: 'stappo.web.min.js'  // outputs single file
+		}))
+		.pipe(gulp.dest('./dist'));
+});
 
-function compileES5() {
-	return gulp.src('src/stappo.js')
+gulp.task('build:lib', function () {
+	return gulp.src(StappoImpl)
 		.pipe(babel({
 			presets: ['es2015']
 		}))
-}
-
-gulp.task('build:es5', function () {
-	return compileES5()
 		.pipe(uglify({
 			output: {
 				ascii_only: true
 			}
 		}))
 		.pipe(rename(function (path) {
-			path.basename += ".min";
+			path.basename = path.basename.replace("impl","min");
+		}))
+		.pipe(gulp.dest('./dist'))
+});
+
+gulp.task('build:web', function () {
+	return gulp.src(StappoWebImpl)
+		.pipe(babel({
+			presets: ['es2015']
+		}))
+		.pipe(uglify({
+			output: {
+				ascii_only: true
+			}
+		}))
+		.pipe(rename(function (path) {
+			path.basename = path.basename.replace("impl","min");
 		}))
 		.pipe(gulp.dest('./dist'))
 });
 
 gulp.task('build:bundle', function () {
-	return compileES5()
+	return renderTemplate('./src/stappo.module.template')
+		.pipe(babel({
+			presets: ['es2015']
+		}))
 		.pipe(browserify({
 			standalone: "stappo"
 		}))
-
 		.pipe(uglify({
 			output: {
 				ascii_only: true
 			}
 		}))
 		.pipe(rename(function (path) {
-			path.basename += ".bundle.min";
+			path.basename = path.basename.replace('module.template','bundle');
 		}))
 		.pipe(gulp.dest('./dist'))
 });
@@ -59,12 +91,13 @@ gulp.task('run:test', function () {
 });
 
 gulp.task('test', function (cb) {
-	sequence('build:es5', 'run:test', cb);
+	sequence('build:bundle', 'run:test', cb);
 });
 
 gulp.task('build', function (cb) {
-	sequence('build:es5','build:bundle', cb);
+	sequence('build:bundle', 'build:lib', 'build:web', cb);
 });
+
 
 gulp.task('default', function (cb) {
 	sequence(['build'], 'run:test', cb);

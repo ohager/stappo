@@ -1,1 +1,1 @@
-module.exports = require('./dist/stappo.min').default;
+module.exports = require('./dist/stappo.module.bundle');

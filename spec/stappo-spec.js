@@ -1,4 +1,4 @@
-var Stappo = require("../dist/stappo.min").default;
+var Stappo = require("../dist/stappo.module");
 var stappo;
 
 describe("Stappo", function () {
@@ -33,7 +33,7 @@ describe("Stappo", function () {
 	});
 
 	it("should return current state", function () {
-		expect(stappo.get()).toEqual({})
+		expect(stappo.get()).toBe(undefined)
 		stappo.update({a:1})
 		expect(stappo.get().a).toBe(1)
 	});
