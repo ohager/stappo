@@ -11,6 +11,31 @@ Besides all that fun, it is meant to be fully functional and usable for real-wor
 
 [ONLINE DEMO](https://rawgit.com/ohager/stappo/master/demo/index.html)
 
+## A brief introduction to Application State Management
+
+Nowadays, web applications can be quite complex and the big challenge of such complex (web) applications how to manage their complexity. State-of-the-art is component based development; 
+Libraries/Frameworks like ReactJS, Angular2, Aurelia, VueJS, RiotJS and others applies this concept. This allows the devs to break down everything in more or less decoupled and (hopefully) 
+reusable parts, which can be put together like Lego(tm).
+
+Besides the composition feature a web application needs to communicate with the backend to store or fetch persistent data. The common approach to interoperate with the backend is a REST-like/-ful API, 
+or even more recent techniques like GraphQL (Relay). 
+
+Each application of a certain complexity (usually the complexity doesn't need to be high, as you may see in the demo) needs to maintain some shared data amongst its components. This data represents a specific situation at a specific moment of that application while a user interacts with it. 
+This is considered as application state. That state should be
+
+1. accessible by all components of an application
+2. ideally, stored in a single place (_Single Source of Truth_)
+3. mutable by a well-defined interface only 
+
+> __Definition__: An application state is a deterministic situation at a certain moment of that application within the context of user interaction.
+
+As one can see in the [ONLINE DEMO](https://rawgit.com/ohager/stappo/master/demo/index.html), even very simple applications must share states amongst it components. 
+The demo consists of very few components (<10), but has to share a item list and a search term:
+
+On adding a new item via the single input field, the item list must be updated. Additionally, the search bar allows text-based filtering; the item list is being updated on changed search term and changed item. 
+This is still      
+
+
 ## Versions
 
 1. __Generic Bundle__ `./dist/stappo.bundle.js` - A browserified bundle usable either on client- (Browser) or server-side (NodeJS). The bundles supports AMD/UMD/CommonJS/ES6 module importation.
