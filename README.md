@@ -33,8 +33,8 @@ As one can see in the [ONLINE DEMO](https://rawgit.com/ohager/stappo/master/demo
 The demo consists of very few components (<10), but has to share a item list and a search term:
 
 On adding a new item via the single input field, the item list must be updated. Additionally, the search bar allows text-based filtering; the item list is being updated on changed search term and changed item. 
-This is still      
-
+This is still a very simple scenario, but it shows that _three components interoperate with two shared states_.
+      
 
 ## Versions
 

@@ -39,7 +39,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
-    "test": "gulp build:bundle && node ./node_modules/jasmine-node/lib/jasmine-node/cli.js ./spec --verbose",
+    "test": "gulp compile:bundle && node ./node_modules/jasmine-node/lib/jasmine-node/cli.js ./spec --verbose",
     "build": "gulp",
     "release": "npm run build && npm publish"
   }

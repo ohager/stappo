@@ -48,7 +48,7 @@
 
 	// stappo comes as class...so we need to instantiate it
 	// using a class would allow to keep several instances, e.g. for domain separation
-	var StappoClass = __webpack_require__(11);
+	var StappoClass = __webpack_require__(12);
 	window.stappo = new StappoClass();
 	__webpack_require__(4);
 	riot.mount('demo');
@@ -2756,11 +2756,12 @@
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(riot) {riot.tag2('demo', '<githubribbon url="https://github.com/ohager/stappo"></githubribbon> <div class="o-container o-container--large c-text"> <h2 class="c-heading">Stappo Demo</h2> <small>This small demo is built with RiotJS, BlazeCSS and Webpack</small> <div class="o-grid u-letter-box--medium"> <div class="o-grid__cell o-grid__cell--width-66"> <itemadder></itemadder> <itemlist></itemlist> </div> <div class="o-grid__cell"> <searchbar></searchbar> </div> </div> </div>', '', '', function(opts) {
+	/* WEBPACK VAR INJECTION */(function(riot) {riot.tag2('demo', '<githubribbon url="https://github.com/ohager/stappo"></githubribbon> <div class="o-container o-container--large c-text"> <h2 class="c-heading">Stappo Demo</h2> <small>This small demo is built with RiotJS, BlazeCSS and Webpack</small> <stappostats></stappostats> <div class="o-grid u-letter-box--medium"> <div class="o-grid__cell o-grid__cell--width-66"> <itemadder></itemadder> <itemlist></itemlist> </div> <div class="o-grid__cell"> <searchbar></searchbar> </div> </div> </div>', '', '', function(opts) {
 			__webpack_require__(5)
 			__webpack_require__(7)
 			__webpack_require__(8)
 			__webpack_require__(9)
+			__webpack_require__(10)
 	});
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -2838,15 +2839,23 @@
 
 /***/ },
 /* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(riot) {riot.tag2('stappostats', '<div class="c-card"> <div class="c-card__item c-card__item--divider">Current Stappo Stats</div> <div class="c-card__item"> <table class="c-table c-table--striped"> <caption class="c-table__caption">Striped rows</caption> <thead class="c-table__head"> <tr class="c-table__row c-table__row--heading"> <th class="c-table__cell">First name</th> <th class="c-table__cell">Last name</th> <th class="c-table__cell">Username</th> </tr> </thead> <tbody class="c-table__body"> <tr class="c-table__row"> <td class="c-table__cell">Jim</td> <td class="c-table__cell">Kirk</td> <td class="c-table__cell">@captaink</td> </tr> <tr class="c-table__row"> <td class="c-table__cell">Mr.</td> <td class="c-table__cell">Spock</td> <td class="c-table__cell">@science101</td> </tr> <tr class="c-table__row"> <td class="c-table__cell">Nyota</td> <td class="c-table__cell">Uhura</td> <td class="c-table__cell">@comms</td> </tr> </tbody> </table> </div> </div>', '', '', function(opts) {
+	});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 11 */
 /***/ function(module, exports) {
 
 	"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t};exports["default"]=function(){function t(e){return Object.getOwnPropertyNames(e).forEach(function(n){var o=e[n];o&&"object"===("undefined"==typeof o?"undefined":_typeof(o))&&t(o)}),Object.freeze(e)}var e=0,n=[],o={};this.listen=function(t,o){return n.push({id:++e,f:t,c:o}),e},this.unlisten=function(t){n=n.filter(function(e){return e.id!==t})},this.update=function(e){o=t(Object.assign({},o,e)),n.forEach(function(t){return t.f.call(t.c,o)})},this.get=function(){return o}};
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(10).default;
+	module.exports = __webpack_require__(11).default;
 
 
 /***/ }

@@ -10,6 +10,8 @@
 			</div>
 			<div class="o-grid__cell">
 				<searchbar/>
+				<br/>
+				<stappostats />
 			</div>
 		</div>
 	</div>
@@ -18,5 +20,6 @@
 		require('./itemadder.tag')
 		require('./itemlist.tag')
 		require('./searchbar.tag')
+		require('./stappostats.tag')
 	</script>
 </demo>
