@@ -1,8 +1,6 @@
 # stappo
 
-`npm i -S stappo`
-
-Maybe the smallest Application State Manager ever.
+Maybe the worlds smallest Application State Manager written in Javascript (less than 300 bytes ).
 
 This project is just to checkout the limits on optimization. The aim is to squeeze out the last bytes and create the worlds smallest
  application state manager written in Javascript.
@@ -11,6 +9,29 @@ Besides all that fun, it is meant to be fully functional and usable for real-wor
 
 [ONLINE DEMO](https://rawgit.com/ohager/stappo/master/demo/index.html)
 
+## Installation
+
+As NPM module (larger version due to module overhead --- see below) 
+
+`npm i -S stappo` 
+
+As plain script (smallest build possible) in your web application 
+
+`<script type="text/javascript" src="https://cdn.rawgit.com/ohager/stappo/master/dist/stappo.web.min.js"></script>`
+
+### Versions
+
+1. __Generic Bundle__ `./dist/stappo.bundle.js` - A browserified bundle usable either on client- (Browser) or server-side (NodeJS). The bundles supports AMD/UMD/CommonJS/ES6 module importation.
+2. __Generic__ `.dist/stappo.min.js` - Usable on client or server-side, but without any module support (plain ES5 class)
+3. __Web-Only Bundle__ `./dist/stappo.web.bundle.js` - Only for browsers, supports AMD/UMD/CommonJS/ES6 module  
+4. __Web-Only__ `./dist/stappo.web.min.js` - Plain class, for browsers only...no overhead at all!    
+
+### Generic vs Web-Only
+
+The generic version implements its own observer (aka pub/sub) pattern, and therefore doesn't rely on specific platform.
+The web-only version uses custom events of the browsers event system (addEventListener). The web-only version is smaller than the generic version.
+
+
 ## A brief introduction to Application State Management
 
 Nowadays, web applications can be quite complex and the big challenge of such complex (web) applications how to manage their complexity. State-of-the-art is component based development; 
@@ -18,7 +39,8 @@ Libraries/Frameworks like ReactJS, Angular2, Aurelia, VueJS, RiotJS and others a
 reusable parts, which can be put together like Lego(tm).
 
 Besides the composition feature a web application needs to communicate with the backend to store or fetch persistent data. The common approach to interoperate with the backend is a REST-like/-ful API, 
-or even more recent techniques like GraphQL (Relay). 
+or even more recent techniques like GraphQL (Relay). Such backend-state must be handled somehow by the client application, especially because the requests are asynchronous. This makes data arrival unpredictable 
+and adds even more complexity.
 
 Each application of a certain complexity (usually the complexity doesn't need to be high, as you may see in the demo) needs to maintain some shared data amongst its components. This data represents a specific situation at a specific moment of that application while a user interacts with it. 
 This is considered as application state. That state should be
@@ -35,38 +57,6 @@ The demo consists of very few components (<10), but has to share a item list and
 On adding a new item via the single input field, the item list must be updated. Additionally, the search bar allows text-based filtering; the item list is being updated on changed search term and changed item. 
 This is still a very simple scenario, but it shows that _three components interoperate with two shared states_.
       
-
-## Versions
-
-1. __Generic Bundle__ `./dist/stappo.bundle.js` - A browserified bundle usable either on client- (Browser) or server-side (NodeJS). The bundles supports AMD/UMD/CommonJS/ES6 module importation.
-2. __Generic__ `.dist/stappo.min.js` - Usable on client or server-side, but without any module support (plain ES5 class)
-3. __Web-Only Bundle__ `./dist/stappo.web.bundle.js` - Only for browsers, supports AMD/UMD/CommonJS/ES6 module  
-4. __Web-Only__ `./dist/stappo.web.min.js` - Plain class, for browsers only...no overhead at all!    
-
-### Generic vs Web-Only
-
-The generic version implements its own observer (aka pub/sub) pattern, and therefore doesn't rely on specific platform.
-The web-only version uses custom events of the browsers event system (addEventListener). The web-only version is smaller than the generic version.
-
-
-## Optimization Status
-
-### 298 Bytes (web-only)
-
-Using the Google Closure Compiler Service the web-only version can be compressed to 298 bytes
-
-```javascript
-function Stappo(a){function d(c){for(var a in c)if(c.hasOwnProperty(a)){var b=c[a];"object"==typeof b&&d(b)}return Object.freeze(c)}a=void 0===a?"stappo":a;var b;this.update=function(c){b=d(Object.assign({},b,c));window.dispatchEvent(new CustomEvent(a,{detail:b}))};this.get=function(){return b}};
-```
-[Show file](https://raw.githubusercontent.com/ohager/stappo/master/dist/stappo.web.min.js) 
-
-### Other sizes
-
-1. __Generic Bundle__ `./dist/stappo.bundle.js` - 1.330 bytes
-2. __Generic__ `.dist/stappo.min.js` - 360 bytes
-3. __Web-Only Bundle__ `./dist/stappo.web.bundle.js` - 1.303 bytes  
-4. __Web-Only__ `./dist/stappo.web.min.js` - 298 bytes    
-
 
 ## Very easy to use
 
@@ -97,6 +87,8 @@ The overall concept is deadly simple. _Stappo_ maintains an Application State, w
 	// stop listen to state changes
 	stappo.unlisten(listener);
 ```
+
+[TRY IT NOW!](https://runkit.com/586d08cb8acd620014d55c0c/586d08cb8acd620014d55c0d)
 
 # API (Generic Version)
 

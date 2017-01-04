@@ -3,7 +3,7 @@
 		<div class="c-card__item c-card__item--divider">Stappo Stats</div>
 		<div class="c-card__item">
 			<table class="c-table c-table--condensed">
-				<caption class="c-table__caption">Version {version}</caption>
+				<caption class="c-table__caption"><a href="https://www.npmjs.com/package/stappo"><img src="https://img.shields.io/npm/v/stappo.svg"/></a></caption>
 				<thead class="c-table__head">
 				<tr class="c-table__row c-table__row--heading">
 					<th class="c-table__cell">Build Type</th>
@@ -12,35 +12,47 @@
 				</thead>
 				<tbody class="c-table__body">
 				<tr class="c-table__row">
-					<td class="c-table__cell">Generic Bundle</td>
-					<td class="c-table__cell">{sizes.genericbundle}</td>
+					<td class="c-table__cell"><a href={stats.genericbundle.url} >Generic Bundle</a></td>
+					<td class="c-table__cell">{stats.genericbundle.size}</td>
 				</tr>
 				<tr class="c-table__row">
-					<td class="c-table__cell">Generic Raw</td>
-					<td class="c-table__cell">{sizes.generic}</td>
+					<td class="c-table__cell"><a href={stats.webbundle.url} >Web Bundle</a></td>
+					<td class="c-table__cell">{stats.webbundle.size}</td>
 				</tr>
 				<tr class="c-table__row">
-					<td class="c-table__cell">Web Bundle</td>
-					<td class="c-table__cell">{sizes.webbundle}</td>
+					<td class="c-table__cell"><a href={stats.generic.url} >Generic</a></td>
+					<td class="c-table__cell">{stats.generic.size}</td>
 				</tr>
 				<tr class="c-table__row">
-					<td class="c-table__cell">Web Raw</td>
-					<td class="c-table__cell">{sizes.web}</td>
+					<td class="c-table__cell"><a href={stats.web.url} >Web</a></td>
+					<td class="c-table__cell">{stats.web.size}</td>
 				</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
 
-
 	<script>
 		const loading = 'loading...';
-		this.version = '0.0.1-alpha';
-		this.sizes = {
-			genericbundle : loading,
-			generic : loading,
-			webbundle : loading,
-			web: loading
+		const githubSourceUrl = 'https://raw.githubusercontent.com/ohager/stappo/master/';
+
+		this.stats = {
+			genericbundle :{
+				url: `${githubSourceUrl}/dist/stappo.bundle.js`,
+				size : loading
+			},
+			webbundle :{
+				url: `${githubSourceUrl}/dist/stappo.web.bundle.js`,
+				size : loading
+			},
+			generic :{
+				url: `${githubSourceUrl}/dist/stappo.min.js`,
+				size : loading
+			},
+			web :{
+				url: `${githubSourceUrl}/dist/stappo.web.min.js`,
+				size : loading
+			}
 		}
 
 		function fetchSize(url, callback){
@@ -53,20 +65,20 @@
 		}
 
 		this.on('mount', () => {
-			fetchSize('https://raw.githubusercontent.com/ohager/stappo/master/dist/stappo.web.min.js', size => {
-				this.sizes.web = size;
+			fetchSize(this.stats.genericbundle.url, size => {
+				this.stats.genericbundle.size = size;
 				this.update();
 			})
-			fetchSize('https://raw.githubusercontent.com/ohager/stappo/master/dist/stappo.web.bundle.js', size => {
-				this.sizes.webbundle = size;
+			fetchSize(this.stats.webbundle.url, size => {
+				this.stats.webbundle.size = size;
 				this.update();
 			})
-			fetchSize('https://raw.githubusercontent.com/ohager/stappo/master/dist/stappo.min.js', size => {
-				this.sizes.generic = size;
+			fetchSize(this.stats.generic.url, size => {
+				this.stats.generic.size = size;
 				this.update();
 			})
-			fetchSize('https://raw.githubusercontent.com/ohager/stappo/master/dist/stappo.bundle.js', size => {
-				this.sizes.genericbundle = size;
+			fetchSize(this.stats.web.url, size => {
+				this.stats.web.size = size;
 				this.update();
 			})
 		})

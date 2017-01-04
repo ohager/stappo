@@ -1,7 +1,7 @@
 {
   "name": "stappo",
   "description": "maybe the smallest application state manager ever",
-  "version": "0.0.3-alpha",
+  "version": "0.0.4",
   "author": "Oliver Hager",
   "email": "oliver@devbutze.com",
   "private": false,
@@ -10,9 +10,14 @@
     "url": "https://github.com/ohager/stappo"
   },
   "keywords": [
+    "react",
+    "reactjs",
+    "riotjs",
+    "angular2",
     "flux",
     "redux",
     "mobx",
+    "state management",
     "application state"
   ],
   "license": "MIT",
