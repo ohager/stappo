@@ -2756,7 +2756,7 @@
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(riot) {riot.tag2('demo', '<githubribbon url="https://github.com/ohager/stappo"></githubribbon> <div class="o-container o-container--large c-text"> <h2 class="c-heading">Stappo Demo</h2> <small>This small demo is built with RiotJS, BlazeCSS and Webpack</small> <stappostats></stappostats> <div class="o-grid u-letter-box--medium"> <div class="o-grid__cell o-grid__cell--width-66"> <itemadder></itemadder> <itemlist></itemlist> </div> <div class="o-grid__cell"> <searchbar></searchbar> </div> </div> </div>', '', '', function(opts) {
+	/* WEBPACK VAR INJECTION */(function(riot) {riot.tag2('demo', '<githubribbon url="https://github.com/ohager/stappo"></githubribbon> <div class="o-container o-container--large c-text"> <h2 class="c-heading">Stappo Demo</h2> <small>This small demo is built with RiotJS, BlazeCSS and Webpack</small> <div class="o-grid u-letter-box--medium"> <div class="o-grid__cell o-grid__cell--width-66"> <itemadder></itemadder> <itemlist></itemlist> </div> <div class="o-grid__cell"> <searchbar></searchbar> <br> <stappostats></stappostats> </div> </div> </div>', '', '', function(opts) {
 			__webpack_require__(5)
 			__webpack_require__(7)
 			__webpack_require__(8)
@@ -2841,7 +2841,56 @@
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(riot) {riot.tag2('stappostats', '<div class="c-card"> <div class="c-card__item c-card__item--divider">Current Stappo Stats</div> <div class="c-card__item"> <table class="c-table c-table--striped"> <caption class="c-table__caption">Striped rows</caption> <thead class="c-table__head"> <tr class="c-table__row c-table__row--heading"> <th class="c-table__cell">First name</th> <th class="c-table__cell">Last name</th> <th class="c-table__cell">Username</th> </tr> </thead> <tbody class="c-table__body"> <tr class="c-table__row"> <td class="c-table__cell">Jim</td> <td class="c-table__cell">Kirk</td> <td class="c-table__cell">@captaink</td> </tr> <tr class="c-table__row"> <td class="c-table__cell">Mr.</td> <td class="c-table__cell">Spock</td> <td class="c-table__cell">@science101</td> </tr> <tr class="c-table__row"> <td class="c-table__cell">Nyota</td> <td class="c-table__cell">Uhura</td> <td class="c-table__cell">@comms</td> </tr> </tbody> </table> </div> </div>', '', '', function(opts) {
+	/* WEBPACK VAR INJECTION */(function(riot) {riot.tag2('stappostats', '<div class="c-card"> <div class="c-card__item c-card__item--divider">Stappo Stats</div> <div class="c-card__item"> <table class="c-table c-table--condensed"> <caption class="c-table__caption"><a href="https://www.npmjs.com/package/stappo"><img src="https://img.shields.io/npm/v/stappo.svg"></a></caption> <thead class="c-table__head"> <tr class="c-table__row c-table__row--heading"> <th class="c-table__cell">Build Type</th> <th class="c-table__cell">Size [bytes]</th> </tr> </thead> <tbody class="c-table__body"> <tr class="c-table__row"> <td class="c-table__cell"><a href="{stats.genericbundle.url}">Generic Bundle</a></td> <td class="c-table__cell">{stats.genericbundle.size}</td> </tr> <tr class="c-table__row"> <td class="c-table__cell"><a href="{stats.webbundle.url}">Web Bundle</a></td> <td class="c-table__cell">{stats.webbundle.size}</td> </tr> <tr class="c-table__row"> <td class="c-table__cell"><a href="{stats.generic.url}">Generic</a></td> <td class="c-table__cell">{stats.generic.size}</td> </tr> <tr class="c-table__row"> <td class="c-table__cell"><a href="{stats.web.url}">Web</a></td> <td class="c-table__cell">{stats.web.size}</td> </tr> </tbody> </table> </div> </div>', '', '', function(opts) {
+			const loading = 'loading...';
+			const githubSourceUrl = 'https://raw.githubusercontent.com/ohager/stappo/master/';
+
+			this.stats = {
+				genericbundle :{
+					url: `${githubSourceUrl}/dist/stappo.bundle.js`,
+					size : loading
+				},
+				webbundle :{
+					url: `${githubSourceUrl}/dist/stappo.web.bundle.js`,
+					size : loading
+				},
+				generic :{
+					url: `${githubSourceUrl}/dist/stappo.min.js`,
+					size : loading
+				},
+				web :{
+					url: `${githubSourceUrl}/dist/stappo.web.min.js`,
+					size : loading
+				}
+			}
+
+			function fetchSize(url, callback){
+				var oReq = new XMLHttpRequest();
+				oReq.addEventListener("load", function() {
+					callback(this.responseText.length);
+				});
+				oReq.open("GET", url);
+				oReq.send();
+			}
+
+			this.on('mount', () => {
+				fetchSize(this.stats.genericbundle.url, size => {
+					this.stats.genericbundle.size = size;
+					this.update();
+				})
+				fetchSize(this.stats.webbundle.url, size => {
+					this.stats.webbundle.size = size;
+					this.update();
+				})
+				fetchSize(this.stats.generic.url, size => {
+					this.stats.generic.size = size;
+					this.update();
+				})
+				fetchSize(this.stats.web.url, size => {
+					this.stats.web.size = size;
+					this.update();
+				})
+			})
 	});
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
