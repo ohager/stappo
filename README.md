@@ -42,16 +42,16 @@ Besides the composition feature a web application needs to communicate with the 
 or even more recent techniques like GraphQL (Relay). Such backend-state must be handled somehow by the client application, especially because the requests are asynchronous. This makes data arrival unpredictable 
 and adds even more complexity.
 
-Each application of a certain complexity (usually the complexity doesn't need to be high, as you may see in the demo) needs to maintain some shared data amongst its components. This data represents a specific situation at a specific moment of that application while a user interacts with it. 
+Each application of a certain complexity (usually the complexity doesn't need to be high, as you may see in the demo) needs to maintain some shared data among its components. This data represents a specific situation at a specific moment of that application while a user interacts with it. 
 This is considered as application state. That state should be
 
 1. accessible by all components of an application
 2. ideally, stored in a single place (_Single Source of Truth_)
 3. mutable by a well-defined interface only 
 
-> __Definition__: An application state is a deterministic situation at a certain moment of that application within the context of user interaction.
+> __Definition__: An application state is a deterministic situation at a certain moment of an application within the context of user interaction.
 
-As one can see in the [ONLINE DEMO](https://rawgit.com/ohager/stappo/master/demo/index.html), even very simple applications must share states amongst it components. 
+As one can see in the [ONLINE DEMO](https://rawgit.com/ohager/stappo/master/demo/index.html), even very simple applications must share states among its components. 
 The demo consists of very few components (<10), but has to share a item list and a search term:
 
 On adding a new item via the single input field, the item list must be updated. Additionally, the search bar allows text-based filtering; the item list is being updated on changed search term and changed item. 
@@ -154,6 +154,6 @@ Returns the current state
 
 # Roadmap
 
-- To be even smaller I need to mess around with the module system.
-- I intent to make it available also as a pre-historic standalone lib (for non-2017 individuals - like me). That way it won't have any overhead it all --- keep it fucking simple, dude!
-- Use Google Closure Compiler Service as builder
+- Cleanup unused dev dependencies
+- Pimp up the demo
+- Try to reduce sizes even more!!!
