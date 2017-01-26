@@ -155,5 +155,6 @@ Returns the current state
 # Roadmap
 
 - Cleanup unused dev dependencies
+- Tests for Web Version (phantomjs?)
 - Pimp up the demo
 - Try to reduce sizes even more!!!

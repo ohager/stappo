@@ -1,4 +1,4 @@
-var Stappo = require("../dist/stappo.bundle");
+var Stappo = require("../build/stappo.js");
 var stappo;
 
 describe("Stappo Generic (Bundle)", function () {
@@ -29,6 +29,43 @@ describe("Stappo Generic (Bundle)", function () {
 		});
 
 		stappo.update({a:1});
+		stappo.unlisten(listener);
+	});
+
+
+
+	it("should make multiple updates and notify", function () {
+
+		stappo.update({a:1});
+		stappo.update({a:2});
+
+		const listener = stappo.listen( s => {
+			expect(s.a).toBe(3);
+		});
+		stappo.update({a:3});
+		stappo.unlisten(listener);
+	});
+
+	it("should merge complex state and notify", function () {
+
+		stappo.update({a:{ b: { c: 1}}});
+
+		const listener = stappo.listen( s => {
+			expect(s.a.b).toEqual( {c:1, d:2} );
+		});
+
+		stappo.update({a:{ b: { d: 2}}});
+		stappo.unlisten(listener);
+	});
+
+	it("should allow computed properties", function () {
+
+		const listener = stappo.listen( s => {
+			expect(s.a).toBe(2);
+			expect(s.b).toBe(200);
+		});
+
+		stappo.update({a:2, get b() {return this.a * 100} });
 		stappo.unlisten(listener);
 	});
 

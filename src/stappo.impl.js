@@ -1,12 +1,12 @@
-function Stappo() {
+function Stappo(merge) {
 
 	var _lCount = 0
 	var _listeners = {}
 	var _state
 
-	function _deepFreeze(obj) {
-		for(let pn in obj)
-			if (typeof obj[pn] == 'object') _deepFreeze(obj[pn])
+	function immutable(obj) {
+		for(const pn in obj)
+			if (typeof obj[pn] == 'object') immutable(obj[pn])
 
 		return Object.freeze(obj)
 	}
@@ -22,10 +22,10 @@ function Stappo() {
 	}
 
 	this.update = obj =>  {
-		_state = _deepFreeze(Object.assign({}, _state, obj))
+		_state = immutable(merge(_state, obj))
 		// notify listeners
-		for(let pn in _listeners){
-			let l = _listeners[pn]
+		for(const pn in _listeners){
+			const l = _listeners[pn]
 			l.f.call(l.c, _state)
 		}
 	}

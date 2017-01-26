@@ -1,1 +1,5 @@
-module.exports = /*__stappo_impl__*/
+const merge = require('./merge')
+
+/*__stappo_impl__*/
+
+module.exports = Stappo.bind(null, merge)

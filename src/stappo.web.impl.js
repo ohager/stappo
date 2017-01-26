@@ -1,14 +1,16 @@
-function Stappo(eventId='stappo') {
+function Stappo(merge, eventId='stappo') {
 
 	var state
 
-	function _deepFreeze(obj) {
+	// maybe extract this guy!
+	function immutable(obj) {
 		for(let pn in obj)
-			if (typeof obj[pn] == 'object') _deepFreeze(obj[pn])
+			if (typeof obj[pn] == 'object') immutable(obj[pn])
 		return Object.freeze(obj)
 	}
+
 	this.update = obj =>  {
-		state = _deepFreeze(Object.assign({}, state, obj))
+		state = immutable(merge(state, obj))
 		window.dispatchEvent(new CustomEvent(eventId, { 'detail': state}))
 	}
 

@@ -1,0 +1,2 @@
+/*__stappo_impl__*/
+Stappo = Stappo.bind(null, /*__merge_impl__*/)
