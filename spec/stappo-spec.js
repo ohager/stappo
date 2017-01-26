@@ -17,7 +17,7 @@ describe("Stappo Generic (Bundle)", function () {
 		});
 
 		stappo.unlisten(listener2);
-		stappo.update({a:1});
+		stappo.update(() => ({a:1}));
 		stappo.unlisten(listener1);
 
 	});
@@ -28,13 +28,13 @@ describe("Stappo Generic (Bundle)", function () {
 			expect(s.a).toBe(1);
 		});
 
-		stappo.update({a:1});
+		stappo.update(() => ({a:1}));
 		stappo.unlisten(listener);
 	});
 
 	it("should return current state", function () {
 		expect(stappo.get()).toBe(undefined)
-		stappo.update({a:1})
+		stappo.update(() => ({a:1}))
 		expect(stappo.get().a).toBe(1)
 	});
 
@@ -47,10 +47,10 @@ describe("Stappo Generic (Bundle)", function () {
 			expect(s.b.bar[0]).toBe(0);
 		});
 
-		stappo.update({
+		stappo.update( () => ({
 			a: { foo: 1},
 			b : {bar: [0,1,2]}
-		});
+		}));
 		stappo.unlisten(listener);
 	});
 

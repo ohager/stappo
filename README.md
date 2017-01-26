@@ -121,7 +121,7 @@ Therefore, no `listen` and `unlisten` method exist. Listening to the event works
 window.addEventListener('stappo', e => { console.log('state updated', e.detail)} )
 const stappo = new Stappo();
 
-stappo.update({poo: 'fart'}); // emits 'stappo' event
+stappo.update(() => ({poo: 'fart'})); // emits 'stappo' event
 
 window.removeEventListener('stappo');
 ```
@@ -138,14 +138,15 @@ const stappoOrders = new Stappo('stappo.orders');
 window.addEventListener('stappo.products', e => { console.log('state updated', e.detail)} )
 window.addEventListener('stappo.orders', e => { console.log('state updated', e.detail)} )
 
-stappoProducts.update({products: newProducts}) // emits 'stappo.products'
-stappoOrders.update({orders: newOrders}) // emits 'stappo.orders'
+stappoProducts.update(() => ({products: newProducts})) // emits 'stappo.products'
+stappoOrders.update(() => ({orders: newOrders})) // emits 'stappo.orders'
 
 ```
   
-### `stappo.update(jsonObj)`
+### `stappo.update(fn)`
   
-Updates the application state, i.e. merges the `jsonObj` into the application state. On update all listeners are notified.
+Updates the application state, i.e. calls the passed function that *must* return a JSON and merges it into the application state.
+On update all listeners are notified.
  
 ### `stappo.get()`
  

@@ -21,8 +21,8 @@ function Stappo() {
 		delete _listeners[hid];
 	}
 
-	this.update = obj =>  {
-		_state = _deepFreeze(Object.assign({}, _state, obj))
+	this.update = fn =>  {
+		_state = _deepFreeze(Object.assign({}, _state, fn()))
 		// notify listeners
 		for(let pn in _listeners){
 			let l = _listeners[pn]
