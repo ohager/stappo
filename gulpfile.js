@@ -5,12 +5,9 @@ var gulp = require('gulp');
 var rename = require('gulp-rename');
 var browserify = require('gulp-browserify');
 var uglify = require('gulp-uglify');
-var preprocess = require('gulp-preprocess');
 var jasmine = require('gulp-jasmine');
 var sequence = require('run-sequence');
 var babel = require('gulp-babel');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
 var replace = require('gulp-replace');
 var post = require("gulp-post");
 

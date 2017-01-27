@@ -32,6 +32,18 @@ describe("Stappo Generic (Bundle)", function () {
 		stappo.unlisten(listener);
 	});
 
+	it("should merge modify simple state using previous state and notify", function () {
+
+		stappo.update(() => ({a:1}));
+
+		const listener = stappo.listen( s => {
+			expect(s.a).toBe(2);
+		});
+
+		stappo.update((s) => ({a:s.a+1}));
+		stappo.unlisten(listener);
+	});
+
 	it("should return current state", function () {
 		expect(stappo.get()).toBe(undefined)
 		stappo.update(() => ({a:1}))

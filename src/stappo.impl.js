@@ -22,7 +22,7 @@ function Stappo() {
 	}
 
 	this.update = fn =>  {
-		_state = _deepFreeze(Object.assign({}, _state, fn()))
+		_state = _deepFreeze(Object.assign({}, _state, fn(_state)))
 		// notify listeners
 		for(let pn in _listeners){
 			let l = _listeners[pn]

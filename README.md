@@ -77,13 +77,13 @@ The overall concept is deadly simple. _Stappo_ maintains an Application State, w
 	});
 	 
 	// update the state --- it'll be merged into the application state
-	stappo.update({ 
+	stappo.update(() => ({
 		foo: { 
 			bar : { 
 				a: 42, 
 				b : [0,1,2]
 			}
-	}});
+	}}));
 	// stop listen to state changes
 	stappo.unlisten(listener);
 ```
@@ -94,8 +94,8 @@ The overall concept is deadly simple. _Stappo_ maintains an Application State, w
 
 ### `stappo.listen(functionObj, context?):number`
  
-The listen function accepts a functionObj of the following signature `function(state){}`. The state is the updated state and it is __immutable__.
-The functionObj is being called on each update of the application state. The second optional argument is the calling context, also referred as the _thisArg_.
+The listen function accepts a `functionObj` of the following signature `function(state){}`. The state is the updated state and it is __immutable__.
+The `functionObj` is being called on each update of the application state. The second optional argument is the calling context, also referred as the _thisArg_.
 It is used to give the called functionObj its calling context (where `this` references to -- similar to `Object.prototype.call`)
 
 The function returns an id, which can/should be used on `stappo.unlisten`.
@@ -104,9 +104,12 @@ The function returns an id, which can/should be used on `stappo.unlisten`.
  
 Revokes the subscription established on `stappo.listen`. The `listenerId` is the return value from `stappo.listen`.
 
-### `stappo.update(jsonObj)`
- 
-Updates the application state, i.e. merges the `jsonObj` into the application state. On update all listeners are notified.
+### `stappo.update(fn)`
+
+Updates the application state, i.e. calls the passed function that *must* return a JSON and merges it into the application state.
+On update all listeners are notified.
+
+`fn` is of type `(currentState) => { return newStateObj }`
 
 ### `stappo.get()`
 
@@ -147,7 +150,9 @@ stappoOrders.update(() => ({orders: newOrders})) // emits 'stappo.orders'
   
 Updates the application state, i.e. calls the passed function that *must* return a JSON and merges it into the application state.
 On update all listeners are notified.
- 
+
+`fn` is of type `(currentState) => { return newStateObj }`
+
 ### `stappo.get()`
  
 Returns the current state
