@@ -88,7 +88,7 @@ The overall concept is deadly simple. _Stappo_ maintains an Application State, w
 	stappo.unlisten(listener);
 ```
 
-[TRY IT NOW!](https://runkit.com/586d08cb8acd620014d55c0c/586d08cb8acd620014d55c0d)
+[TRY IT NOW!](https://runkit.com/ohager/stappo)
 
 # API (Generic Version)
 
