@@ -45,7 +45,7 @@ describe("Stappo Generic (Bundle)", function () {
 	});
 
 	it("should return current state", function () {
-		expect(stappo.get()).toBe(undefined)
+		expect(stappo.get()).toEqual({})
 		stappo.update(() => ({a:1}))
 		expect(stappo.get().a).toBe(1)
 	});

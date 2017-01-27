@@ -1,7 +1,7 @@
 {
   "name": "stappo",
   "description": "maybe the smallest application state manager ever",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Oliver Hager",
   "email": "oliver@devbutze.com",
   "private": false,

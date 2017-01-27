@@ -2,7 +2,7 @@ function Stappo() {
 
 	var _lCount = 0
 	var _listeners = {}
-	var _state
+	var _state = {}
 
 	function _deepFreeze(obj) {
 		for(let pn in obj)

@@ -9,7 +9,7 @@
 	<script>
 		search(e)
 		{
-			stappo.update({query: this.refs.search.value});
+			stappo.update( () => ({query: this.refs.search.value}) );
 		}
 	</script>
 </searchbar>

@@ -1,6 +1,6 @@
 function Stappo(eventId='stappo') {
 
-	var state
+	var _state = {}
 
 	function _deepFreeze(obj) {
 		for(let pn in obj)
@@ -8,11 +8,11 @@ function Stappo(eventId='stappo') {
 		return Object.freeze(obj)
 	}
 	this.update = fn =>  {
-		state = _deepFreeze(Object.assign({}, state, fn()))
-		window.dispatchEvent(new CustomEvent(eventId, { 'detail': state}))
+		_state = _deepFreeze(Object.assign({}, _state, fn()))
+		window.dispatchEvent(new CustomEvent(eventId, { 'detail': _state}))
 	}
 
-	this.get = () => state
+	this.get = () => _state
 }
 
 
