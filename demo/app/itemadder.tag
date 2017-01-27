@@ -2,7 +2,7 @@
 	<div class="c-input-group">
 		<button class="c-button c-button--brand" onclick={clear}>Clear All</button>
 		<div class="o-field">
-			<input ref="item" class="c-field u-xlarge" placeholder="Enter name of item to add...">
+			<input ref="item" class="c-field u-xlarge" placeholder="Enter name of item to add..." onkeypress={keypress}>
 		</div>
 		<button class="c-button c-button--brand" onclick={add}>Add</button>
 	</div>
@@ -18,6 +18,13 @@
 		}
 
 		// ---- components functions
+		keypress(e)
+		{
+			if(e.code === 'Enter'){
+				e.preventDefault();
+				this.add();
+			}
+		}
 
 		add(e)
 		{
